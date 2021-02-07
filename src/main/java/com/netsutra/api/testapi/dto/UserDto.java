@@ -13,9 +13,17 @@ public class UserDto {
 	
 	private String email;
 	
-	private Boolean gender;
+	private String address;
+	
+	private String gender;
 
 	private String status;
+	
+	private Checkbox1Dto checkbox1;
+	
+	private Checkbox2Dto checkbox2;
+	
+	private Checkbox3Dto checkbox3;
 
 
 }

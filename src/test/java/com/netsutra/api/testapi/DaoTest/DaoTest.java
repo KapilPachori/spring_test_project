@@ -26,7 +26,7 @@ public class DaoTest {
 		user.setEmail("er.kapilpachori@gmail.com");
 		user.setPassword("kapil123");
 		user.setStatus("New");
-		user.setGender(true);
+		//user.setGender(true);
 		
 		
 		userRepository.save(user);

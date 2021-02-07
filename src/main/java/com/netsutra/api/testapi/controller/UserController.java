@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netsutra.api.testapi.dto.PasswordDto;
 import com.netsutra.api.testapi.dto.UserDto;
 import com.netsutra.api.testapi.entity.User;
 import com.netsutra.api.testapi.service.UserService;
@@ -58,6 +59,15 @@ public class UserController {
 		} catch (Exception e) {
 			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 		}
-	}	
+	}
+	
+	@PostMapping(value = "/login")
+	public ResponseEntity<Boolean> loginUser(@RequestBody PasswordDto passwordDto){
+		try {
+			return new ResponseEntity<Boolean>(userService.checkCredential(passwordDto), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+		}
+	} 
 
 }

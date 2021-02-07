@@ -24,14 +24,28 @@ public class User {
 
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "address")
+	private String address;
 
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "gender")
-	private Boolean gender;
+	private String  gender;
 
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "hobby_1")
+	private String hobby1;
+	
+	@Column(name = "hobby_2")
+	private String hobby2;
+	
+	@Column(name = "hobby_3")
+	private String hobby3;
+	
+	
 
 }

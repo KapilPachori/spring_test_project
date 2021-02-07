@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.netsutra.api.testapi.dao.UserRepository;
+import com.netsutra.api.testapi.dto.PasswordDto;
 import com.netsutra.api.testapi.dto.UserDto;
 import com.netsutra.api.testapi.entity.User;
 import com.netsutra.api.testapi.service.UserService;
@@ -22,9 +23,19 @@ public class UserServiceImpl implements UserService{
 		User user = new User();
 		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
+		user.setAddress(userDto.getAddress());
 		user.setPassword(userDto.getPassword());
 		user.setStatus(userDto.getStatus());
-		user.setGender(false);
+		user.setGender(userDto.getGender());
+		if(userDto.getCheckbox1().isChecked()) {
+			user.setHobby1(userDto.getCheckbox1().getTitle());
+		}
+		if(userDto.getCheckbox2().isChecked()) {
+			user.setHobby2(userDto.getCheckbox2().getTitle());
+		}
+		if(userDto.getCheckbox3().isChecked()) {
+			user.setHobby3(userDto.getCheckbox3().getTitle());
+		}
 		userDao.save(user);
 		
 		return user;
@@ -58,6 +69,24 @@ public class UserServiceImpl implements UserService{
 			return findById.get();
 		}
 		return null;
+	}
+
+	@Override
+	public Boolean checkCredential(PasswordDto passwordDto) {
+		boolean check = false;
+		User user = null;
+		String email = passwordDto.getEmail();
+		if(email != null && email != " ") {
+			user = userDao.findByEmail(email);
+		}else {
+			return check;
+		}
+		
+		if(user != null && user.getEmail().equals(passwordDto.getEmail()) && user.getPassword().equals(passwordDto.getPassword())) {
+			check = true;	
+		}
+		
+		return check;
 	}
 
 }
